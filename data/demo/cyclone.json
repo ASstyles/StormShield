@@ -1,0 +1,72 @@
+{
+  "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL FORECAST",
+  "id": "CYCLONE-JAL-26",
+  "name": "Cyclone Jal-26",
+  "category": "Very Severe Cyclonic Storm",
+  "latitude": 16.95,
+  "longitude": 82.50,
+  "wind_speed": 165.0,
+  "pressure": 952.0,
+  "rainfall": 320.0,
+  "storm_surge": 3.6,
+  "movement_direction": 305.0,
+  "movement_speed": 16.0,
+  "radius": 45.0,
+  "eta_hours": 6.0,
+  "track": [
+    {
+      "time": "T-24h",
+      "latitude": 15.60,
+      "longitude": 84.80,
+      "wind_speed": 115.0,
+      "pressure": 984.0,
+      "intensity": "Cyclonic Storm",
+      "status": "OBSERVED"
+    },
+    {
+      "time": "T-18h",
+      "latitude": 16.00,
+      "longitude": 84.10,
+      "wind_speed": 130.0,
+      "pressure": 974.0,
+      "intensity": "Severe Cyclonic Storm",
+      "status": "OBSERVED"
+    },
+    {
+      "time": "T-12h",
+      "latitude": 16.45,
+      "longitude": 83.35,
+      "wind_speed": 145.0,
+      "pressure": 964.0,
+      "intensity": "Very Severe Cyclonic Storm",
+      "status": "OBSERVED"
+    },
+    {
+      "time": "T-6h",
+      "latitude": 16.95,
+      "longitude": 82.50,
+      "wind_speed": 165.0,
+      "pressure": 952.0,
+      "intensity": "Very Severe Cyclonic Storm",
+      "status": "CURRENT"
+    },
+    {
+      "time": "Landfall (T-0)",
+      "latitude": 17.20,
+      "longitude": 82.35,
+      "wind_speed": 175.0,
+      "pressure": 946.0,
+      "intensity": "Extremely Severe Cyclonic Storm",
+      "status": "FORECAST"
+    },
+    {
+      "time": "T+6h",
+      "latitude": 17.65,
+      "longitude": 82.05,
+      "wind_speed": 120.0,
+      "pressure": 972.0,
+      "intensity": "Severe Cyclonic Storm",
+      "status": "FORECAST"
+    }
+  ]
+}

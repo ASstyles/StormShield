@@ -1,0 +1,40 @@
+[
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "ROAD_COASTAL_PORT",
+    "name": "Coastal Port Arterial Corridor",
+    "type": "road",
+    "district": "Kakinada",
+    "latitude": 16.9500,
+    "longitude": 82.2420,
+    "criticality": 0.88,
+    "length_km": 7.2,
+    "elevation": 1.9,
+    "distance_to_coast_km": 0.3,
+    "metadata": {
+      "road_category": "Arterial Expressway",
+      "status": "COMPROMISED_UNDER_SURGE",
+      "surge_inundation_depth_m": 2.8,
+      "traffic_throughput_vph": 2400
+    }
+  },
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "ROAD_NH216_BYPASS",
+    "name": "NH-216 Inland Elevated Bypass Corridor",
+    "type": "road",
+    "district": "Kakinada",
+    "latitude": 17.0100,
+    "longitude": 82.2200,
+    "criticality": 0.92,
+    "length_km": 11.4,
+    "elevation": 11.8,
+    "distance_to_coast_km": 7.5,
+    "metadata": {
+      "road_category": "National Highway",
+      "status": "CLEAR_SAFE_PASSAGE",
+      "surge_inundation_depth_m": 0.0,
+      "traffic_throughput_vph": 3800
+    }
+  }
+]

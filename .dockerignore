@@ -1,0 +1,12 @@
+node_modules
+__pycache__
+.git
+.env
+*.log
+dist
+build
+.venv
+venv
+*.sqlite
+*.sqlite3
+*.db

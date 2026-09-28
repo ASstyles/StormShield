@@ -1,0 +1,150 @@
+{
+  "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL FORECAST",
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ZONE-AP-01",
+        "zone_name": "Kakinada Port & Coastal Belt",
+        "district": "Kakinada",
+        "flood_risk": 88.5,
+        "surge_risk": 94.0,
+        "wind_risk": 82.0,
+        "infrastructure_risk": 86.0,
+        "overall_risk": 87.8,
+        "risk_level": "CRITICAL",
+        "population_exposed": 85000,
+        "elevation_mean": 2.1,
+        "distance_to_coast_km": 0.5,
+        "explainability": {
+          "rainfall_contribution": 34.0,
+          "elevation_contribution": 31.0,
+          "coastal_exposure_contribution": 21.0,
+          "historical_susceptibility_contribution": 14.0,
+          "narrative": "Severe storm surge overtopping combined with 320mm rainfall and low elevation (2.1m) places port lifelines under extreme inundation threat."
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [82.20, 16.88],
+            [82.35, 16.88],
+            [82.35, 17.02],
+            [82.20, 17.02],
+            [82.20, 16.88]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ZONE-AP-02",
+        "zone_name": "Konaseema Deltaic Floodplain",
+        "district": "Konaseema",
+        "flood_risk": 82.0,
+        "surge_risk": 78.5,
+        "wind_risk": 72.0,
+        "infrastructure_risk": 74.0,
+        "overall_risk": 77.4,
+        "risk_level": "HIGH",
+        "population_exposed": 62000,
+        "elevation_mean": 3.4,
+        "distance_to_coast_km": 4.2,
+        "explainability": {
+          "rainfall_contribution": 38.0,
+          "elevation_contribution": 28.0,
+          "coastal_exposure_contribution": 18.0,
+          "historical_susceptibility_contribution": 16.0,
+          "narrative": "Riverine backwater pooling along Godavari distributaries causes elevated road submergence."
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [81.85, 16.55],
+            [82.15, 16.55],
+            [82.15, 16.85],
+            [81.85, 16.85],
+            [81.85, 16.55]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ZONE-AP-03",
+        "zone_name": "Visakhapatnam Urban Corridor",
+        "district": "Visakhapatnam",
+        "flood_risk": 55.0,
+        "surge_risk": 60.0,
+        "wind_risk": 68.0,
+        "infrastructure_risk": 58.0,
+        "overall_risk": 60.3,
+        "risk_level": "MEDIUM",
+        "population_exposed": 140000,
+        "elevation_mean": 12.8,
+        "distance_to_coast_km": 2.0,
+        "explainability": {
+          "rainfall_contribution": 32.0,
+          "elevation_contribution": 15.0,
+          "coastal_exposure_contribution": 25.0,
+          "historical_susceptibility_contribution": 28.0,
+          "narrative": "Elevated coastal topography reduces surge penetration, but gale-force winds threaten overhead utility poles."
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [83.20, 17.65],
+            [83.42, 17.65],
+            [83.42, 17.85],
+            [83.20, 17.85],
+            [83.20, 17.65]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ZONE-AP-04",
+        "zone_name": "Krishna Estuary Lowlands",
+        "district": "Krishna",
+        "flood_risk": 64.0,
+        "surge_risk": 58.0,
+        "wind_risk": 52.0,
+        "infrastructure_risk": 54.0,
+        "overall_risk": 58.1,
+        "risk_level": "MEDIUM",
+        "population_exposed": 48000,
+        "elevation_mean": 4.8,
+        "distance_to_coast_km": 6.5,
+        "explainability": {
+          "rainfall_contribution": 35.0,
+          "elevation_contribution": 30.0,
+          "coastal_exposure_contribution": 20.0,
+          "historical_susceptibility_contribution": 15.0,
+          "narrative": "Tidal backflow in low-lying agricultural drainage canals creates secondary access blockages."
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [80.80, 15.95],
+            [81.15, 15.95],
+            [81.15, 16.25],
+            [80.80, 16.25],
+            [80.80, 15.95]
+          ]
+        ]
+      }
+    }
+  ]
+}

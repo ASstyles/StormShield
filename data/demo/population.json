@@ -1,0 +1,31 @@
+{
+  "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+  "census_year": 2026,
+  "aggregation": "1km2_grid_blocks",
+  "districts": [
+    {
+      "district": "Kakinada",
+      "total_population": 485000,
+      "exposed_to_critical_surge": 85000,
+      "coastal_settlement_density_sqkm": 1420
+    },
+    {
+      "district": "Konaseema",
+      "total_population": 390000,
+      "exposed_to_critical_surge": 62000,
+      "coastal_settlement_density_sqkm": 880
+    },
+    {
+      "district": "Visakhapatnam",
+      "total_population": 1250000,
+      "exposed_to_critical_surge": 140000,
+      "coastal_settlement_density_sqkm": 2850
+    },
+    {
+      "district": "Krishna",
+      "total_population": 520000,
+      "exposed_to_critical_surge": 48000,
+      "coastal_settlement_density_sqkm": 690
+    }
+  ]
+}

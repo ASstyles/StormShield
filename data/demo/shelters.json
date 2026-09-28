@@ -1,0 +1,56 @@
+[
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "SHELTER_PORT",
+    "name": "Kakinada Coastal Cyclone Shelter #1",
+    "type": "shelter",
+    "district": "Kakinada",
+    "latitude": 16.9450,
+    "longitude": 82.2510,
+    "criticality": 0.90,
+    "capacity": 2500,
+    "elevation": 2.8,
+    "distance_to_coast_km": 0.8,
+    "metadata": {
+      "potable_water_liters": 15000,
+      "solar_microgrid": true,
+      "food_stocks_days": 3
+    }
+  },
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "SHELTER_INLAND",
+    "name": "NH-216 Inland Multipurpose Relief Shelter",
+    "type": "shelter",
+    "district": "Kakinada",
+    "latitude": 17.0200,
+    "longitude": 82.2150,
+    "criticality": 0.85,
+    "capacity": 4000,
+    "elevation": 9.5,
+    "distance_to_coast_km": 8.5,
+    "metadata": {
+      "potable_water_liters": 30000,
+      "solar_microgrid": true,
+      "food_stocks_days": 7
+    }
+  },
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "SHELTER_KONASEEMA",
+    "name": "Amalapuram Central Cyclone Center",
+    "type": "shelter",
+    "district": "Konaseema",
+    "latitude": 16.5780,
+    "longitude": 82.0050,
+    "criticality": 0.88,
+    "capacity": 3200,
+    "elevation": 4.1,
+    "distance_to_coast_km": 14.0,
+    "metadata": {
+      "potable_water_liters": 20000,
+      "solar_microgrid": false,
+      "food_stocks_days": 5
+    }
+  }
+]

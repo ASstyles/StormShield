@@ -1,0 +1,14 @@
+{
+  "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+  "source_model": "Copernicus 30m Digital Elevation Model (Synthetic Benchmark)",
+  "resolution_m": 30,
+  "vertical_datum": "EGM96",
+  "control_points": [
+    { "name": "Kakinada Deepwater Port Quay", "latitude": 16.960, "longitude": 82.260, "elevation_m": 1.8 },
+    { "name": "Kakinada GGH Hospital Campus", "latitude": 16.960, "longitude": 82.238, "elevation_m": 3.2 },
+    { "name": "NH-216 Inland Highground", "latitude": 17.010, "longitude": 82.220, "elevation_m": 11.8 },
+    { "name": "Konaseema Godavari Estuary Bund", "latitude": 16.550, "longitude": 82.020, "elevation_m": 2.2 },
+    { "name": "Visakhapatnam Dolphin's Nose Ridge", "latitude": 17.680, "longitude": 83.290, "elevation_m": 145.0 },
+    { "name": "Visakhapatnam Beach Road Corridor", "latitude": 17.710, "longitude": 83.320, "elevation_m": 4.5 }
+  ]
+}

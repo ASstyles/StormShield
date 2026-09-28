@@ -1,0 +1,59 @@
+[
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "HOSPITAL_KGGH",
+    "name": "Kakinada Government General Hospital (KGGH)",
+    "type": "hospital",
+    "district": "Kakinada",
+    "latitude": 16.9604,
+    "longitude": 82.2381,
+    "criticality": 1.0,
+    "capacity": 1100,
+    "elevation": 3.2,
+    "distance_to_coast_km": 1.1,
+    "metadata": {
+      "icu_beds": 84,
+      "backup_power_type": "Diesel Generator 500kVA",
+      "fuel_autonomy_hours": 4.5,
+      "ground_floor_vulnerable": true
+    }
+  },
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "HOSPITAL_APOLLO",
+    "name": "Apollo Speciality Hospital Kakinada",
+    "type": "hospital",
+    "district": "Kakinada",
+    "latitude": 16.9850,
+    "longitude": 82.2450,
+    "criticality": 0.95,
+    "capacity": 250,
+    "elevation": 4.8,
+    "distance_to_coast_km": 2.4,
+    "metadata": {
+      "icu_beds": 36,
+      "backup_power_type": "Dual Generators",
+      "fuel_autonomy_hours": 12.0,
+      "ground_floor_vulnerable": false
+    }
+  },
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "HOSPITAL_KIMS",
+    "name": "KIMS ICON Hospital Visakhapatnam",
+    "type": "hospital",
+    "district": "Visakhapatnam",
+    "latitude": 17.7290,
+    "longitude": 83.3010,
+    "criticality": 0.90,
+    "capacity": 430,
+    "elevation": 18.5,
+    "distance_to_coast_km": 3.8,
+    "metadata": {
+      "icu_beds": 52,
+      "backup_power_type": "Triple Redundant Generators",
+      "fuel_autonomy_hours": 24.0,
+      "ground_floor_vulnerable": false
+    }
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "POWER_KAKINADA_400KV",
+    "name": "Kakinada 400kV Grid Switching Substation",
+    "type": "power_station",
+    "district": "Kakinada",
+    "latitude": 16.9720,
+    "longitude": 82.2280,
+    "criticality": 0.98,
+    "capacity": 800,
+    "elevation": 3.0,
+    "distance_to_coast_km": 2.2,
+    "metadata": {
+      "supplies_hospital_ids": ["HOSPITAL_KGGH", "HOSPITAL_APOLLO"],
+      "supplies_pumping_ids": ["WATER_PUMP_KAKINADA"],
+      "flood_protection_bund_height_m": 2.5,
+      "inundation_threshold_m": 2.6
+    }
+  },
+  {
+    "notice": "DEMO / SYNTHETIC DATA - NOT AN OFFICIAL REGISTRY",
+    "id": "POWER_VIZAG_220KV",
+    "name": "Gajuwaka 220kV Substation Visakhapatnam",
+    "type": "power_station",
+    "district": "Visakhapatnam",
+    "latitude": 17.6910,
+    "longitude": 83.2180,
+    "criticality": 0.92,
+    "capacity": 550,
+    "elevation": 15.0,
+    "distance_to_coast_km": 6.5,
+    "metadata": {
+      "supplies_hospital_ids": ["HOSPITAL_KIMS"],
+      "supplies_pumping_ids": [],
+      "flood_protection_bund_height_m": 4.0,
+      "inundation_threshold_m": 4.5
+    }
+  }
+]

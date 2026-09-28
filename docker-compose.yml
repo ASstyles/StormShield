@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: stormshield-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-stormshield}
+      POSTGRES_USER: ${POSTGRES_USER:-stormshield}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-St0rmSh1eld_X_Secur3_2026_Postgres!}
+    # Database is internal only on stormshield-network (no public port exposure)
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backend/app/database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stormshield -d stormshield"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - stormshield-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: stormshield-backend
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-stormshield}:${POSTGRES_PASSWORD:-St0rmSh1eld_X_Secur3_2026_Postgres!}@postgres:5432/${POSTGRES_DB:-stormshield}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.8-flash}
+      - GEMINI_TEMPERATURE=${GEMINI_TEMPERATURE:-0.2}
+      - GEMINI_TIMEOUT_SECONDS=${GEMINI_TIMEOUT_SECONDS:-60}
+      - GEE_SERVICE_ACCOUNT=${GEE_SERVICE_ACCOUNT:-}
+      - GEE_PRIVATE_KEY_PATH=${GEE_PRIVATE_KEY_PATH:-}
+      - GEE_PROJECT_ID=${GEE_PROJECT_ID:-}
+      - CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173,http://frontend:80,http://frontend
+      - ENV=production
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - stormshield-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: stormshield-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - stormshield-network
+
+networks:
+  stormshield-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
