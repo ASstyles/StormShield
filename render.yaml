@@ -2,7 +2,7 @@
 # STORMSHIELD X — RENDER BLUEPRINT SPECIFICATION
 # Deploys 2 decoupled, independent services:
 # 1. stormshield-api (FastAPI Python Docker Web Service)
-# 2. stormshield-frontend (React Vite Nginx Docker Web Service)
+# 2. stormshield-frontend (React Vite Static Site on Render CDN)
 # ========================================================
 version: "1"
 
@@ -32,26 +32,26 @@ services:
       - key: GEMINI_TEMPERATURE
         value: "0.2"
       - key: CORS_ORIGINS
-        value: "https://stormshield.onrender.com,https://stormshield-frontend.onrender.com,https://stormshield-api.onrender.com,http://localhost:3000"
+        value: "https://stormshield.onrender.com,https://stormshield-frontend.onrender.com,http://localhost:3000"
       - key: ENV
         value: production
 
   # ------------------------------------------------------
-  # Service 2: StormShield X Frontend (React + Vite + Nginx)
+  # Service 2: StormShield X Frontend (React + Vite Static Site)
+  # Ultra-fast, zero-overhead CDN delivery with SPA rewrite
   # ------------------------------------------------------
-  - type: web
+  - type: static
     name: stormshield-frontend
-    runtime: docker
-    dockerfilePath: frontend/Dockerfile
-    dockerContext: frontend
-    plan: free
-    region: oregon
-    healthCheckPath: /health
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
-      - key: PORT
-        value: 80
       - key: VITE_API_URL
-        value: https://stormshield-api.onrender.com
+        value: https://stormshield.onrender.com
 
 # --------------------------------------------------------
 # Managed PostgreSQL Database
