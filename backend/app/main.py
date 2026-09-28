@@ -1,9 +1,11 @@
+import os
 import logging
 import time
 import uuid
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, Response
-from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi import FastAPI, Request, Response, HTTPException
+from fastapi.responses import RedirectResponse, JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database.session import init_db
@@ -155,15 +157,83 @@ def root_health_ready():
     finally:
         db.close()
 
-@app.get("/")
-def root():
-    return {
-        "platform": settings.APP_NAME,
-        "tagline": "From cyclone forecasts to infrastructure decisions.",
-        "status": "ONLINE",
-        "docs": "/docs",
-        "api_docs": "/api/docs"
-    }
+# -----------------------------------------------------------------------------
+# Static Files & React SPA Serving Configuration
+# -----------------------------------------------------------------------------
+def resolve_static_dir() -> str:
+    # 1. Environment variable if set
+    env_dir = os.getenv("STATIC_DIR")
+    if env_dir and os.path.isdir(env_dir):
+        return os.path.abspath(env_dir)
+    # 2. Container path /app/static
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    app_static = os.path.join(base_dir, "static")
+    if os.path.isdir(app_static):
+        return app_static
+    # 3. Local monorepo sibling frontend/dist
+    repo_root = os.path.dirname(base_dir)
+    dist_dir = os.path.join(repo_root, "frontend", "dist")
+    if os.path.isdir(dist_dir):
+        return dist_dir
+    return app_static
+
+STATIC_DIR = resolve_static_dir()
+logger.info(f"Static assets directory resolved to: {STATIC_DIR} (exists: {os.path.isdir(STATIC_DIR)})")
+
+# Mount /assets if directory exists
+assets_dir = os.path.join(STATIC_DIR, "assets")
+if os.path.isdir(assets_dir):
+    app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+    logger.info(f"Mounted static /assets from: {assets_dir}")
+
+@app.get("/", include_in_schema=False)
+async def serve_root():
+    index_file = os.path.join(STATIC_DIR, "index.html")
+    if os.path.isfile(index_file):
+        return FileResponse(
+            index_file,
+            media_type="text/html",
+            headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
+        )
+    return JSONResponse(
+        content={
+            "platform": settings.APP_NAME,
+            "tagline": "From cyclone forecasts to infrastructure decisions.",
+            "status": "ONLINE",
+            "notice": "Frontend build not detected in static/ directory. Please run 'npm run build' inside frontend/.",
+            "docs": "/docs",
+            "api_docs": "/api/docs",
+            "health": "/health"
+        }
+    )
+
+@app.get("/{full_path:path}", include_in_schema=False)
+async def serve_spa_route(full_path: str):
+    # Guard API endpoints, docs, and health checks
+    if (
+        full_path.startswith("api")
+        or full_path.startswith("docs")
+        or full_path.startswith("redoc")
+        or full_path.startswith("openapi.json")
+        or full_path.startswith("health")
+    ):
+        raise HTTPException(status_code=404, detail=f"API resource '/{full_path}' not found")
+
+    # If the requested path is an existing static file (e.g. favicon.svg, icons.svg)
+    file_path = os.path.join(STATIC_DIR, full_path)
+    if os.path.isfile(file_path):
+        return FileResponse(file_path)
+
+    # Otherwise return index.html for SPA client-side routing (React Router)
+    index_file = os.path.join(STATIC_DIR, "index.html")
+    if os.path.isfile(index_file):
+        return FileResponse(
+            index_file,
+            media_type="text/html",
+            headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
+        )
+
+    raise HTTPException(status_code=404, detail="Page not found")
 
 if __name__ == "__main__":
     import uvicorn
