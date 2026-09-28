@@ -11,7 +11,29 @@ import {
   AnalyticsSummary
 } from '../types';
 
-const BASE_URL = '/api';
+declare global {
+  interface Window {
+    __STORMSHIELD_CONFIG__?: {
+      API_URL?: string;
+    };
+  }
+}
+
+function getBaseApiUrl(): string {
+  // 1. Runtime window config (allows dynamic injection if needed)
+  if (typeof window !== 'undefined' && window.__STORMSHIELD_CONFIG__?.API_URL) {
+    return `${window.__STORMSHIELD_CONFIG__.API_URL.replace(/\/+$/, '')}/api`;
+  }
+  // 2. Build-time Vite environment variable (Render production)
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim()) {
+    return `${envUrl.trim().replace(/\/+$/, '')}/api`;
+  }
+  // 3. Relative fallback (Vite dev proxy or Nginx reverse proxy)
+  return '/api';
+}
+
+const BASE_URL = getBaseApiUrl();
 
 export async function fetchHealth(): Promise<any> {
   const res = await fetch(`${BASE_URL}/health`);

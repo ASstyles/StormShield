@@ -52,7 +52,7 @@ def health_check():
     """Liveness probe: verifies service liveness and database connectivity."""
     db_ok = is_db_connected()
     return {
-        "status": "ok",
+        "status": "healthy" if db_ok else "degraded",
         "database": "connected" if db_ok else "disconnected",
         "version": settings.APP_VERSION,
         "service": "StormShield Emergency Impact Engine",
@@ -69,7 +69,7 @@ def health_ready(db: Session = Depends(get_db)):
         cyclones_count = db.query(CycloneModel).count()
         infra_count = db.query(InfrastructureModel).count()
         return {
-            "status": "ok",
+            "status": "healthy",
             "ready": True,
             "database": "connected",
             "version": settings.APP_VERSION,

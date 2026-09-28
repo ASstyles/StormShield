@@ -1,0 +1,67 @@
+# ========================================================
+# STORMSHIELD X — RENDER BLUEPRINT SPECIFICATION
+# Deploys 2 decoupled, independent services:
+# 1. stormshield-api (FastAPI Python Docker Web Service)
+# 2. stormshield-frontend (React Vite Nginx Docker Web Service)
+# ========================================================
+version: "1"
+
+services:
+  # ------------------------------------------------------
+  # Service 1: StormShield X API (FastAPI Backend)
+  # ------------------------------------------------------
+  - type: web
+    name: stormshield-api
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stormshield-db
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.8-flash
+      - key: GEMINI_TEMPERATURE
+        value: "0.2"
+      - key: CORS_ORIGINS
+        value: "https://stormshield.onrender.com,https://stormshield-frontend.onrender.com,https://stormshield-api.onrender.com,http://localhost:3000"
+      - key: ENV
+        value: production
+
+  # ------------------------------------------------------
+  # Service 2: StormShield X Frontend (React + Vite + Nginx)
+  # ------------------------------------------------------
+  - type: web
+    name: stormshield-frontend
+    runtime: docker
+    dockerfilePath: frontend/Dockerfile
+    dockerContext: frontend
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 80
+      - key: VITE_API_URL
+        value: https://stormshield-api.onrender.com
+
+# --------------------------------------------------------
+# Managed PostgreSQL Database
+# Note: Render Managed PostgreSQL supports PostGIS on standard plans.
+# On free tier or if PostGIS extension is pending, StormShield X 
+# automatically engages its resilient SQLite spatial fallback.
+# --------------------------------------------------------
+databases:
+  - name: stormshield-db
+    databaseName: stormshield
+    user: stormshield
+    plan: free
+    region: oregon

@@ -94,6 +94,7 @@ async def log_requests_middleware(request: Request, call_next):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
+    allow_origin_regex=r"https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -118,7 +119,7 @@ def root_health():
     from app.ai.gemini_service import gemini_service
     db_ok = is_db_connected()
     return {
-        "status": "ok",
+        "status": "healthy" if db_ok else "degraded",
         "database": "connected" if db_ok else "disconnected",
         "version": settings.APP_VERSION,
         "service": "StormShield Emergency Impact Engine",
@@ -139,7 +140,7 @@ def root_health_ready():
         cyclones_count = db.query(CycloneModel).count()
         infra_count = db.query(InfrastructureModel).count()
         return {
-            "status": "ok",
+            "status": "healthy",
             "ready": True,
             "database": "connected",
             "version": settings.APP_VERSION,

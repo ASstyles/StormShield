@@ -52,15 +52,32 @@ class Settings(BaseSettings):
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://frontend:80",
-        "http://frontend"
+        "http://frontend",
+        "https://stormshield.onrender.com",
+        "https://stormshield-frontend.onrender.com",
+        "https://stormshield-api.onrender.com"
     ]
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:
+        defaults = [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://frontend:80",
+            "http://frontend",
+            "https://stormshield.onrender.com",
+            "https://stormshield-frontend.onrender.com",
+            "https://stormshield-api.onrender.com"
+        ]
         if isinstance(v, str):
-            return [i.strip() for i in v.split(",") if i.strip()]
-        return v
+            custom = [i.strip() for i in v.split(",") if i.strip()]
+            return list(dict.fromkeys(defaults + custom))
+        if isinstance(v, list):
+            return list(dict.fromkeys(defaults + v))
+        return defaults
     
     # Risk Parameters (Configurable thresholds)
     RISK_WEIGHT_FLOOD: float = 0.35
